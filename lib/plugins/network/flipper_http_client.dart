@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:uuid/uuid.dart';
+
 import './flipper_http_client_request.dart';
 
 class FlipperHttpClient implements HttpClient {
@@ -142,5 +144,18 @@ class FlipperHttpClient implements HttpClient {
     FlipperHttpClientRequest requestWithInterceptor =
         new FlipperHttpClientRequest(_uuid.v4(), request);
     return requestWithInterceptor;
+  }
+
+  @override
+  set connectionFactory(
+      Future<ConnectionTask<Socket>> Function(
+              Uri url, String? proxyHost, int? proxyPort)?
+          f) {
+    // TODO: implement connectionFactory
+  }
+
+  @override
+  set keyLog(Function(String line)? callback) {
+    // TODO: implement keyLog
   }
 }
