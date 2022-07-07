@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader;
 
 import org.leanflutter.plugins.flutter_flipperkit.plugins.FlipperDatabaseBrowserPlugin;
 import org.leanflutter.plugins.flutter_flipperkit.plugins.FlipperReduxInspectorPlugin;
+import org.leanflutter.plugins.flutter_flipperkit.plugins.FlipperJpushMessagePlugin;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -51,6 +52,7 @@ public class FlutterFlipperkitPlugin implements FlutterPlugin, MethodCallHandler
 
     private FlipperDatabaseBrowserPlugin flipperDatabaseBrowserPlugin;
     private FlipperReduxInspectorPlugin flipperReduxInspectorPlugin;
+    private FlipperJpushMessagePlugin flipperJpushMessagePlugin;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -85,6 +87,9 @@ public class FlutterFlipperkitPlugin implements FlutterPlugin, MethodCallHandler
             return;
         } else if (method.startsWith("pluginReduxInspector")) {
             flipperReduxInspectorPlugin.handleMethodCall(call, result);
+            return;
+        } else if (method.startsWith("pluginJpushMessageReport")) {
+            flipperJpushMessagePlugin.handleMethodCall(call, result);
             return;
         }
 
@@ -133,6 +138,9 @@ public class FlutterFlipperkitPlugin implements FlutterPlugin, MethodCallHandler
                     break;
                 case FlipperReduxInspectorPlugin.ID:
                     flipperClient.addPlugin(flipperReduxInspectorPlugin);
+                    break;
+                case FlipperJpushMessagePlugin.ID:
+                    flipperClient.addPlugin(flipperJpushMessagePlugin);
                     break;
             }
         }
@@ -272,6 +280,7 @@ public class FlutterFlipperkitPlugin implements FlutterPlugin, MethodCallHandler
 
             flipperDatabaseBrowserPlugin = new FlipperDatabaseBrowserPlugin();
             flipperReduxInspectorPlugin = new FlipperReduxInspectorPlugin();
+            flipperJpushMessagePlugin = new FlipperJpushMessagePlugin();
         }
 
         this.channel = new MethodChannel(messenger, CHANNEL_NAME);
