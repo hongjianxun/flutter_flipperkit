@@ -30,8 +30,8 @@ flutter:
       android:
         package: org.leanflutter.plugins.flutter_flipperkit
         pluginClass: FlutterFlipperkitPlugin
-      ios:
-        pluginClass: FlutterFlipperkitPlugin
+      # ios:
+      #   pluginClass: FlutterFlipperkitPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
